@@ -1,0 +1,11 @@
+site_name: napari-particle-counter
+site_description: Single-molecule particle counting plugin
+site_author: Roman Kiselev
+
+theme: readthedocs
+
+
+repo_url: https://github.com/ximeg/napari-particle-counter
+
+pages:
+- Home: index.md
