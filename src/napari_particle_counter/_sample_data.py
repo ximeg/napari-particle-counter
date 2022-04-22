@@ -12,4 +12,28 @@ import numpy
 
 def make_sample_data():
     """Generates an image"""
-    return numpy.random.rand(512, 512)
+    return (
+        [
+            numpy.random.rand(512, 512),
+            {"name": "random image 1", "contrast_limits": [0, 0.9]},
+            "image",
+        ],
+        [
+            numpy.random.rand(512, 512),
+            {
+                "name": "random image 2",
+                "contrast_limits": [0, 1.9],
+                "colormap": "viridis",
+            },
+            "image",
+        ],
+        [
+            numpy.random.rand(512, 512),
+            {
+                "name": "random image 3",
+                "contrast_limits": [0, 1.0],
+                "colormap": "red",
+            },
+            "image",
+        ],
+    )
