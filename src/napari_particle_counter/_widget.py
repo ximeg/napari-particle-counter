@@ -10,10 +10,6 @@ def particle_counting_dock():
     return _gui
 
 
-def _plot():
-    print("Plot button clicked")
-
-
 @magicgui(
     threshold=dict(widget_type="Slider", min=0, max=65536, readout=False),
     number_of_particles=dict(widget_type="Label"),
@@ -57,23 +53,30 @@ def auto_threshold(image_data, nsd=8):
     return frame.mean() + nsd * frame.std()
 
 
+def get_current_frame():
+    v = _gui.viewer.value
+    if v.dims.ndim == 2:
+        return _gui.img_layer.value.data
+    if v.dims.ndim == 3:
+        return _gui.img_layer.value.data[v.dims.current_step[0]]
+
+
 def update_mask_layer():
-    """Create the preview mask."""
+    """Create a preview mask."""
     img_layer = _gui.img_layer.value
     if img_layer:
-        mask = img_layer.data > _gui.threshold.value
+
+        mask = get_current_frame() > _gui.threshold.value
 
         v = _gui.viewer.value
         if "mask" in v.layers:
             v.layers["mask"].data = mask
+            # rearrange, making sure the mask is on top
+            v.layers.append(v.layers.pop("mask"))
+            count_particles(mask)
         else:
-            v.add_image(
-                mask, name="preview", colormap="bop purple", opacity=0.5
-            )
-
-        # rearrange, making sure the mask is on top
-        v.layers.append(v.layers.pop("mask"))
-        count_particles(mask)
+            v.add_image(mask, colormap="bop purple", opacity=0.5)
+            v.dims.events.connect(update_mask_layer)
 
 
 def count_particles(mask):
@@ -93,3 +96,11 @@ def my_callback(value: str):
 @_gui.plot.clicked.connect
 def on_plot_clicked():
     raise NotImplemented("Result plotting is not implemented yet")
+
+
+### Known bugs
+# * everything falls apart when a layer gets deleted, because the signals and slots are still connected
+#
+#
+#
+#
