@@ -2,8 +2,11 @@ name: napari-particle-counter
 display_name: napari particle counter
 contributions:
   commands:
-    - id: napari-particle-counter.make_sample_data
-      python_name: napari_particle_counter._sample_data:make_sample_data
+    - id: napari-particle-counter.load_sample_data_1
+      python_name: napari_particle_counter._sample_data:load_sample_data_1
+      title: Load sample data from napari particle counter 
+    - id: napari-particle-counter.load_sample_data_2
+      python_name: napari_particle_counter._sample_data:load_sample_data_2
       title: Load sample data from napari particle counter 
     - id: napari-particle-counter.make_qwidget
       python_name: napari_particle_counter._widget:ExampleQWidget
@@ -15,9 +18,12 @@ contributions:
       python_name: napari_particle_counter._widget:example_function_widget
       title: Make example function widget   
   sample_data:
-    - command: napari-particle-counter.make_sample_data
-      display_name: napari particle counter
+    - command: napari-particle-counter.load_sample_data_1
+      display_name: "smTIRF dataset #1"
       key: unique_id.1 
+    - command: napari-particle-counter.load_sample_data_2
+      display_name: "smTIRF dataset #2"
+      key: unique_id.2
   widgets:
     - command: napari-particle-counter.make_qwidget
       display_name: Example QWidget

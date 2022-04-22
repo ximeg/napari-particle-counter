@@ -10,29 +10,26 @@ from __future__ import annotations
 import numpy
 
 
-def make_sample_data():
+def load_sample_data_1():
     """Generates an image"""
     return (
         [
             numpy.random.rand(512, 512),
-            {"name": "random image 1", "contrast_limits": [0, 0.9]},
+            {"name": "Dataset 1", "contrast_limits": [0, 0.9]},
             "image",
         ],
+    )
+
+
+def load_sample_data_2():
+    """Generates an image"""
+    return (
         [
             numpy.random.rand(512, 512),
             {
-                "name": "random image 2",
+                "name": "Dataset 2",
                 "contrast_limits": [0, 1.9],
                 "colormap": "viridis",
-            },
-            "image",
-        ],
-        [
-            numpy.random.rand(512, 512),
-            {
-                "name": "random image 3",
-                "contrast_limits": [0, 1.0],
-                "colormap": "red",
             },
             "image",
         ],
