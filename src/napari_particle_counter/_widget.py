@@ -19,7 +19,7 @@ class ExampleQWidget(QWidget):
         super().__init__()
         self.viewer = napari_viewer
 
-        btn = QPushButton("Click me!")
+        btn = QPushButton("Plot!")
         btn.clicked.connect(self._on_click)
 
         self.setLayout(QHBoxLayout())
@@ -30,7 +30,9 @@ class ExampleQWidget(QWidget):
 
 
 @magic_factory
-def example_magic_widget(img_layer: "napari.layers.Image"):
+def example_magic_widget(
+    img_layer: "napari.layers.Image", layers: "napari.layers.Layer"
+):
     print(f"you have selected {img_layer}")
 
 

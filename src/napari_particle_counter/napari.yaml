@@ -5,9 +5,6 @@ contributions:
     - id: napari-particle-counter.load_sample_data_1
       python_name: napari_particle_counter._sample_data:load_sample_data_1
       title: Load sample data from napari particle counter 
-    - id: napari-particle-counter.load_sample_data_2
-      python_name: napari_particle_counter._sample_data:load_sample_data_2
-      title: Load sample data from napari particle counter 
     - id: napari-particle-counter.make_qwidget
       python_name: napari_particle_counter._widget:ExampleQWidget
       title: Make example QWidget
@@ -19,11 +16,8 @@ contributions:
       title: Make example function widget   
   sample_data:
     - command: napari-particle-counter.load_sample_data_1
-      display_name: "smTIRF dataset #1"
+      display_name: "smTIRF ERASE switch"
       key: unique_id.1 
-    - command: napari-particle-counter.load_sample_data_2
-      display_name: "smTIRF dataset #2"
-      key: unique_id.2
   widgets:
     - command: napari-particle-counter.make_qwidget
       display_name: Example QWidget
