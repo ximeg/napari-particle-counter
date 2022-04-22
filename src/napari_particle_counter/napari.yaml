@@ -5,24 +5,13 @@ contributions:
     - id: napari-particle-counter.load_sample_data_1
       python_name: napari_particle_counter._sample_data:load_sample_data_1
       title: Load sample data from napari particle counter 
-    - id: napari-particle-counter.make_qwidget
-      python_name: napari_particle_counter._widget:ExampleQWidget
-      title: Make example QWidget
-    - id: napari-particle-counter.make_magic_widget
-      python_name: napari_particle_counter._widget:example_magic_widget
-      title: Make example magic widget
-    - id: napari-particle-counter.make_func_widget
-      python_name: napari_particle_counter._widget:example_function_widget
-      title: Make example function widget   
+    - id: napari-particle-counter.particle_counting_dock
+      python_name: napari_particle_counter._widget:particle_counting_dock
+      title: Single-molecule particle counting dock
   sample_data:
     - command: napari-particle-counter.load_sample_data_1
       display_name: "smTIRF ERASE switch"
       key: unique_id.1 
   widgets:
-    - command: napari-particle-counter.make_qwidget
-      display_name: Example QWidget
-    - command: napari-particle-counter.make_magic_widget
-      display_name: Example Magic Widget
-    - command: napari-particle-counter.make_func_widget
-      autogenerate: true
-      display_name: Example Function Widget 
+    - command: napari-particle-counter.particle_counting_dock
+      display_name: Single-molecule particle counting

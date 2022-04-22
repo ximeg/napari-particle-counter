@@ -5,4 +5,4 @@ except ImportError:
 
 
 from ._sample_data import *
-from ._widget import ExampleQWidget, example_magic_widget
+from ._widget import particle_counting_dock

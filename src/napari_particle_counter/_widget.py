@@ -1,43 +1,39 @@
 """
-This module is an example of a barebones QWidget plugin for napari
-
-It implements the Widget specification.
-see: https://napari.org/plugins/stable/guides.html#widgets
-
-Replace code below according to your needs.
+GUI for particle counting
 """
-from qtpy.QtWidgets import QWidget, QHBoxLayout, QPushButton
-from magicgui import magic_factory
+from magicgui import magicgui
+
+import numpy as np
 
 
-class ExampleQWidget(QWidget):
-    # your QWidget.__init__ can optionally request the napari viewer instance
-    # in one of two ways:
-    # 1. use a parameter called `napari_viewer`, as done here
-    # 2. use a type annotation of 'napari.viewer.Viewer' for any parameter
-    def __init__(self, napari_viewer):
-        super().__init__()
-        self.viewer = napari_viewer
-
-        btn = QPushButton("Plot!")
-        btn.clicked.connect(self._on_click)
-
-        self.setLayout(QHBoxLayout())
-        self.layout().addWidget(btn)
-
-    def _on_click(self):
-        print("napari has", len(self.viewer.layers), "layers")
+def particle_counting_dock():
+    return _gui
 
 
-@magic_factory
-def example_magic_widget(
-    img_layer: "napari.layers.Image", layers: "napari.layers.Layer"
+@magicgui(threshold=dict(min=0, max=65536))
+def _gui(
+    viewer: "napari.viewer.Viewer",
+    img_layer: "napari.layers.Image",
+    threshold=65536,
+    use_ROI=True,
+    number_of_particles=0,
+    info_box="",
 ):
-    print(f"you have selected {img_layer}")
+    print(img_layer)
 
 
-# Uses the `autogenerate: true` flag in the plugin manifest
-# to indicate it should be wrapped as a magicgui to autogenerate
-# a widget.
-def example_function_widget(img_layer: "napari.layers.Image"):
-    print(f"you have selected {img_layer}")
+@_gui.img_layer.changed.connect
+def on_img_layer_changed(img_layer):
+    _gui.info_box.value = img_layer
+    print(f"img_layer changed! New layer: {img_layer}")
+
+
+@_gui.threshold.changed.connect
+def on_threshold_changed(threshold):
+    _gui.info_box.value = str(threshold)
+    print(f"threshold changed! New threshold: {threshold}")
+
+
+@_gui.called.connect
+def my_callback(value: str):
+    print(f"Your function was called! The result is: {value}")
